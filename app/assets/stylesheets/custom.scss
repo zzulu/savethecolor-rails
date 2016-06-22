@@ -1,0 +1,210 @@
+// Place all the styles related to the talks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+		position: relative;
+    font-family: 'Noto-Sans',Arial,sans-serif;
+}
+
+/* Side Menu */
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    margin-right: -250px;
+    overflow-y: auto;
+    background: #222;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 55px;
+    font-size: 18px;
+    line-height: 55px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+#back-btn {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#menu-toggle {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    -webkit-transition: all 0.4s ease 0s;
+    -moz-transition: all 0.4s ease 0s;
+    -ms-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.toggle {
+    margin: 5px;
+}
+
+.btn-dark {
+    border-radius: 0;
+    color: #fff;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.btn-light {
+    border-radius: 0;
+    color: #333;
+    background-color: rgb(255,255,255);
+}
+
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active {
+    color: #333;
+    background-color: rgba(255,255,255,0.8);
+}
+
+
+/* Main */
+
+header {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.main-box {
+	position: relative;
+}
+
+.main-letter {
+	font-weight: 700;
+	font-size: 2em;
+  letter-spacing: -2px;
+}
+
+@media (min-width: 768px){
+	.main-letter {
+		font-size: 5em;
+	}
+
+  .col-sm-offset-right-3 {
+    margin-right: 25%;
+  }
+
+  .col-sm-offset-right-4 {
+    margin-right: 33.3333333333%;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-vertical-center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.each-message {
+  padding: 0.4em 0;
+}
+
+.text-muted {
+    font-size: 12px;
+}
+
+.message {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.message-name {
+  font-size: 16px;
+}
+
+
+.circle {
+  margin-top: 10px;
+  margin-bottom: 10px;
+	width: 50%;
+	height: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+  display: inline-block;
+}

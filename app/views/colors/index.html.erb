@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="row">
+		<h2 class="text-center">
+			<%= current_user.email %>'s Colors
+		</h2>
+
+
+    <% @colors.each do |c| %>
+    <div class="thumbnail text-center col-xs-12 col-sm-4 col-md-3 col-lg-2">
+      <div style="height:40px; background-color:<%= c.hex %>"></div>
+      <h4 style="color:<%= c.hex %>;"><%= c.hex %></h4>
+    </div>
+
+    <% end %>
+
+  </div>
+</div>

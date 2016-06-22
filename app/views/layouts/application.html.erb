@@ -8,6 +8,35 @@
 </head>
 <body>
 
+  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+  <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="/"  onclick = $("#menu-close").click(); >SAVE THE COLOR</a>
+            </li>
+            <li>
+              <% if current_user.nil? %>
+                <%= link_to 'Sign in', new_user_session_path, onclick:'$("#menu-close").click();' %>
+              <% else %>
+                <%= link_to 'Sign out', destroy_user_session_path, onclick:'$("#menu-close").click();', method: :delete %>
+              <% end %>
+            </li>
+            <!-- <li>
+                <a href="#" onclick = $("#menu-close").click(); >About</a>
+            </li>
+            <li>
+                <a href="#" onclick = $("#menu-close").click(); >Services</a>
+            </li>
+            <li>
+                <a href="#" onclick = $("#menu-close").click(); >Portfolio</a>
+            </li>
+            <li>
+                <a href="#" onclick = $("#menu-close").click(); >Contact</a>
+            </li> -->
+        </ul>
+    </nav>
+
 <%= yield %>
 
 </body>
