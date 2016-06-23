@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20160622102503) do
 
   create_table "colors", force: :cascade do |t|
+    t.string   "origin"
     t.string   "hex"
     t.string   "rgb"
     t.string   "hsv"

@@ -2,6 +2,7 @@ class CreateColors < ActiveRecord::Migration
   def change
     create_table :colors do |t|
 
+      t.string :origin
       t.string :hex
       t.string :rgb
       t.string :hsv
