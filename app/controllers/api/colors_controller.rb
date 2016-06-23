@@ -1,6 +1,8 @@
 class Api::ColorsController < ApplicationController
   # protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+
+  skip_before_filter :verify_authenticity_token,
+                     :if => Proc.new { |c| c.request.format == 'application/json' }
 
   # http_basic_authenticate_with :name => "myfinance", :password => "credit123"
 
@@ -11,6 +13,7 @@ class Api::ColorsController < ApplicationController
     @user = User.where(authentication_token: params[:auth_token]).first
   end
 
+
   def index
     @colors = Color.all
 
@@ -19,27 +22,37 @@ class Api::ColorsController < ApplicationController
     end
   end
 
-  def show
-    @color = @user.colors.all
+  #
+  # def show
+  #   @colors = @user.colors.all
+  #
+  #   respond_to do |format|
+  #     format.json { render json: { success: true, info: "Loaded", data: @colors } }
+  #   end
+  # end
 
-    respond_to do |format|
-      format.json { render json: { success: true, info: "Got", data: @color } }
-    end
-  end
 
   def create
 
-    @color = Color.new
-    @color.user_id = @user.id
-    @color.hex = params[:color][:hex]
-
-
-    respond_to do |format|
-      if @color.save
-        format.json { render json: { success: true, info: "Saved", data: @color }, status: :created }
-      else
-        format.json { render json: @color.errors, status: :unprocessable_entity }
+    unless @user
+      respond_to do |format|
+        format.json { render json: { success: false, info: "Expired Session. Please sign in again." }}
       end
+    else
+
+      @color = Color.new
+      @color.user_id = @user.id
+      @color.origin = params[:color][:origin]
+      @color.hex = params[:color][:hex]
+
+      respond_to do |format|
+        if @color.save
+          format.json { render json: { success: true, info: "Saved", data: @color }, status: :created }
+        else
+          format.json { render json: @color.errors, status: :unprocessable_entity }
+        end
+      end
+
     end
 
   end
