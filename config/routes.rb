@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     post 'colors/delete' => 'colors#destroy' , :defaults => { :format => 'json' }
-    resources :colors, :except => [:destroy], :defaults => { :format => 'json' }
+    resources :colors, :only => [:index, :create], :defaults => { :format => 'json' }
   end
 
   namespace :api do

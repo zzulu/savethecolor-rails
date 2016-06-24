@@ -1,12 +1,12 @@
 <div class="container">
-	<div class="row">
+	<div id="result" class="row">
 		<h2 class="text-center">
 			<%= current_user.email %>'s Colors
 		</h2>
 
 
     <% @colors.each do |c| %>
-    <div class="thumbnail text-center col-xs-12 col-sm-4 col-md-3 col-lg-2">
+    <div id="<%= c.id %>" class="thumbnail text-center col-xs-12 col-sm-4 col-md-3 col-lg-2">
       <div style="height:40px; background-color:<%= c.hex %>"></div>
       <h4 style="color:<%= c.hex %>;"><%= c.hex %></h4>
     </div>
@@ -15,3 +15,23 @@
 
   </div>
 </div>
+
+<script>
+
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
+
+  var pusher = new Pusher('118121d9f76040e8f847', {
+    cluster: 'ap1',
+    encrypted: true
+  });
+
+  var channel = pusher.subscribe('<%= current_user.email %>');
+  channel.bind('add_color_event', function(data) {
+    document.getElementById("result").innerHTML += '<div class="thumbnail text-center col-xs-12 col-sm-4 col-md-3 col-lg-2"><div style="height:40px; background-color:'+data.color+'"></div><h4 style="color:'+data.color+';">'+data.color+'</h4></div>';
+  });
+
+	channel.bind('delete_color_event', function(data) {
+    document.getElementById(data.id).remove();
+  });
+</script>
