@@ -38,6 +38,7 @@ class Api::ColorsController < ApplicationController
         if @color.save
 
           Pusher.trigger( @user.email.to_s , 'add_color_event', {
+            id: @color.id,
             color: @color.hex
           })
 
