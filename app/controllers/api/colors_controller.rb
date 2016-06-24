@@ -13,7 +13,6 @@ class Api::ColorsController < ApplicationController
     @user = User.where(authentication_token: params[:auth_token]).first
   end
 
-
   def index
     @colors = Color.all
 
@@ -21,16 +20,6 @@ class Api::ColorsController < ApplicationController
       format.json { render json: @colors }
     end
   end
-
-  #
-  # def show
-  #   @colors = @user.colors.all
-  #
-  #   respond_to do |format|
-  #     format.json { render json: { success: true, info: "Loaded", data: @colors } }
-  #   end
-  # end
-
 
   def create
 
@@ -47,6 +36,11 @@ class Api::ColorsController < ApplicationController
 
       respond_to do |format|
         if @color.save
+
+          Pusher.trigger( @user.email.to_s , 'add_color_event', {
+            color: @color.hex
+          })
+
           format.json { render json: { success: true, info: "Saved", data: @color }, status: :created }
         else
           format.json { render json: @color.errors, status: :unprocessable_entity }
@@ -54,24 +48,15 @@ class Api::ColorsController < ApplicationController
       end
 
     end
-
   end
-  #
-  # def update
-  #   respond_to do |format|
-  #     if @user.update_attributes(params[:user])
-  #       format.json { head :no_content, status: :ok }
-  #       format.xml { head :no_content, status: :ok }
-  #     else
-  #       format.json { render json: @user.errors, status: :unprocessable_entity }
-  #       format.xml { render xml: @user.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  #
+
   def destroy
 
     @color = Color.find(params[:color][:id])
+
+    Pusher.trigger( @color.user.email.to_s , 'delete_color_event', {
+      id: @color.id
+    })
 
     respond_to do |format|
       if @color.destroy
